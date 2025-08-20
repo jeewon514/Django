@@ -1,0 +1,15 @@
+{% extends 'first/base.html' %}
+{% load static %}
+{% block content %}
+<h2>로또 번호 추천</h2>
+        <p>Hello World!</p>
+
+        <img style="width:100px;" src="{% static 'first/image.jpg' %}" alt="헬로키티"/>
+
+        <p>{{ current_date }}</p>
+        <p>{{ current_date|date:"Y년 m월 d일 H시 i분 s초" }}</p>
+
+        <!--<a href="/select/">시작하기!</a>               시작하기 버튼-->
+        <a href="{% url 'select' %}">시작하기!</a>        <!--이걸 더 추천/ url.py에서 가져옴(새로 만든)-->
+
+{% endblock %}

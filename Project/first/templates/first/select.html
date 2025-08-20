@@ -1,0 +1,10 @@
+{% extends 'first/base.html' %}
+{% load static %}
+{% block content %}
+<p>수를 하나 입력해주세요.</p>
+<form action="{% url 'result' %}" method="get">
+    <!--get메서드 써서 number를 넘기기-->
+    <input type="number" name="number">
+    <button type="submit">결과 보기</button>
+</form>
+{% endblock %}
