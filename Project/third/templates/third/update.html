@@ -1,0 +1,16 @@
+{% extends 'third/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <form action="{% url 'restaurant-update' %}" method="post">
+        {% csrf_token %}         <!--잘못된 요청을 검증하기 위해-->
+        <input type="hidden" name="id" value="{{ form.instance.id }}"/> <!--instance는 views에 있는 item(입력 받은 id). 그러면 원래 name, address 전체 다 뜸-->
+
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">수정완료</button>
+
+    </form>
+</div>
+{% endblock %}

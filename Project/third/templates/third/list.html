@@ -1,0 +1,49 @@
+{% extends 'third/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Bootstrap의 .container 클래스를 사용하여 쭝앙 정렬된 콘텐츠 영역 만들기-->
+<div class="container">
+    {% for item in restaurants %}
+    <div class="row restaurant-item" style="margin:20px auto;">     <!--'row': Bootstrap의 행(row) 레이아웃, style: 위아래 20px&좌우 자동 중앙 정렬-->
+        <div class="col-sm-12">                     <!-- .col-sm-12 클래스: 작은 화면부터 전체 너비(12칸) 차지)-->
+            <!--카드 컴포넌트 시작 / 'border-secondary': 회색 계열 테두리 적용-->
+            <div class="card border-secondary">
+                <div class="card-body">             <!--카드 내부의 본문 영역, 여백과 글꼴 스타일이 적용됨-->
+                    <h5 class="card-title">{{ item.name }}</h5>             <!--카드 제목-->
+                    <h6 class="card-subtitle mb-2 text-muted">{{ item.address }}</h6>   <!--카드 부제목, mb-2: 하단 여백, text-muted: 회색 톤 글자색-->
+                    <p class="card-text">음식점 설명</p>             <!--카드의 일반 텍스트 영역! "card-text"-->
+                    <a href="{% url 'restaurant-detail' %}?id={{ item.id }}" class="card-link">자세히 보기</a>    <!--"card-link" 클래스: z카드 안의 링크 스타일 조정/ href는 '#'== 비활성화 상태-->
+                    <a href="{% url 'restaurant-update' %}?id={{ item.id }}" class="card-link">수정하기</a>
+                </div>
+            </div>
+        </div>
+        <!--<h4>{{ item.name }}</h4>
+        <p>{{ item.address }}</p>-->
+    </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <div class="pagination">
+                <span class="step-links text-center" style="width:100%;">   <!--가운데 정렬 && 스타일: 양옆 꽉차게(인라인 선언)-->
+                    {% if restaurants.has_previous %}
+                        <a href="?page=1">&laquo;</a>
+                        <a href="?page={{ restaurants.previous_page_number }}">{{ restaurants.previous_page_number }}</a>
+                    {% endif %}
+
+                    <span class="current">
+                        {{ restaurants.number }}
+                    </span>
+
+                    {% if restaurants.has_next %}
+                        <a href="?page={{ restaurants.next_page_number }}">{{ restaurants.next_page_number }}</a>
+                        <!--...-->
+                        <a href="?page={{ restaurants.paginator.num_pages }}">{{ restaurants.paginator.num_pages }}</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
