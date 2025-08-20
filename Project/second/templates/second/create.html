@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>create</title>
+</head>
+<body>
+    <!-- action쪽 url을 다음페이지인 confirm페이지로 연결-->
+    <form action="{% url 'create' %}" method="post">
+        {% csrf_token %}        <!--입력 폼의 유효성 검사-->
+        {{ form }}
+        <button type="submit">제출</button>
+    </form>
+</body>
+</html>
